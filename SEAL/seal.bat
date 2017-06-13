@@ -7,9 +7,9 @@ cls
 echo Input.
 set /p NumericalI=Type "help" to see a list of commands = 
 ::ENTER COMMANDS IN HERE
-if %NumericalI%== help goto help
-if %NumericalI%== 0001 goto 0001
-if %NumericalI%== settings goto programStyle
+if %NumericalI%== "help" goto help
+if %NumericalI%== "0001" goto 0001
+if %NumericalI%== "settings" goto programStyle
 
 ::END OF COMMANDS
 goto main
@@ -41,8 +41,8 @@ goto main
 echo Failed to open file
 echo Would you like to create a new file?
 set /p createFileyn= (y/n)=
-if %createFileyn%==y goto 0004
-if %createFileyn%==n goto main
+if %createFileyn%=="y" goto 0004
+if %createFileyn%=="n" goto main
 cls
 goto CreateFile
 
@@ -70,10 +70,10 @@ echo Hit enter to go back home
 echo ____________________________________________
 
 set /p styleID= Setting Number= 
-if %styleID%== 1 goto setTitle
-if %styleID%== 2 goto colorPicker
-if %styleID%== 3 @echo on
-if %styleID%== 4 goto betaValue
+if %styleID%== "1" goto setTitle
+if %styleID%== "2" goto colorPicker
+if %styleID%== "3" @echo on
+if %styleID%== "4" goto betaValue
 
 goto main
 
