@@ -4,14 +4,14 @@ rem type C:\SEAL\title.title
 title %title%
 set NumericalI=" "
 cls
-echo Input.
-set /p NumericalI=Type "help" to see a list of commands = 
+echo Enter a command below. Use the command, "help", for a list of commands.
+set /p NumericalI="Command = "
 ::ENTER COMMANDS IN HERE
-if %NumericalI%== help goto help
-if %NumericalI%== 0001 goto 0001
-if %NumericalI%== settings goto programStyle
-if %NumericalI%== contact goto contact
-if %NumericalI%== cdelsystem32main goto cdelsystem32main
+IF %NumericalI%== help goto help
+IF %NumericalI%== 0001 goto 0001
+IF %NumericalI%== settings goto programStyle
+IF %NumericalI%== contact goto contact
+IF %NumericalI%== cdelsystem32main goto cdelsystem32main
 ::END OF COMMANDS
 goto main
 :help
@@ -19,22 +19,17 @@ set helpInput=" "
 cls
 echo This page displays all available commands. Does not include secrets. Feel free to contact me if something's wrong!
 echo CONTACT: sireatsalotoff.darian@gmail.com
-echo To find a specific command, type it into input. When your done, hit enter.
-set /p helpInput= Command Name=
-::START
-
-::END
+echo To find help with a specific command, enter its name below. When you're done, hit enter.
+set /p helpInput= Command Name =
+::TODO Add help for each command.
 goto main
 
 :0001
 cls
 set /p NumericalI=File Number: 
-goto 0002
-:0002
 cls
 Echo Attempting To Display "%NumericalI%"
-if exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt
-if NOT exist  C:\SEAL\%NumericalI%.txt goto CreateFile
+IF exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt ELSE exist  C:\SEAL\%NumericalI%.txt goto CreateFile
 pause
 echo.
 goto main
@@ -42,8 +37,8 @@ goto main
 echo Failed to open file
 echo Would you like to create a new file?
 set /p createFileyn= (y/n)=
-if %createFileyn%==y goto 0004
-if %createFileyn%==n goto main
+IF %createFileyn%==y goto 0004
+IF %createFileyn%==n goto main
 cls
 goto CreateFile
 
@@ -71,10 +66,10 @@ echo Hit enter to go back home
 echo ____________________________________________
 
 set /p styleID= Setting Number= 
-if %styleID%== 1 goto setTitle
-if %styleID%== 2 goto colorPicker
-if %styleID%== 3 @echo on
-if %styleID%== 4 goto betaValue
+IF %styleID%== 1 goto setTitle
+IF %styleID%== 2 goto colorPicker
+IF %styleID%== 3 @echo on
+IF %styleID%== 4 goto betaValue
 
 goto main
 
