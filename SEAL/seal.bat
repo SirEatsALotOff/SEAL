@@ -7,11 +7,11 @@ cls
 echo Enter a command below. Use the command, "help", for a list of commands.
 set /p NumericalI="Command = "
 ::ENTER COMMANDS IN HERE
-IF "%NumericalI%"== help goto help
-IF "%NumericalI%"== 0001 goto 0001
-IF "%NumericalI%"== settings goto programStyle
-IF "%NumericalI%"== contact goto contact
-IF "%NumericalI%"== cdelsystem32main goto cdelsystem32main
+IF /I "%NumericalI%"== help goto help
+IF /I "%NumericalI%"== 0001 goto 0001
+IF /I "%NumericalI%"== settings goto programStyle
+IF /I "%NumericalI%"== contact goto contact
+IF /I "%NumericalI%"== cdelsystem32main goto cdelsystem32main
 ::END OF COMMANDS
 goto main
 :help
@@ -29,7 +29,7 @@ cls
 set /p NumericalI=File Number: 
 cls
 Echo Attempting To Display "%NumericalI%"
-IF exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt ELSE exist  C:\SEAL\%NumericalI%.txt goto CreateFile
+IF /I exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt ELSE exist  C:\SEAL\%NumericalI%.txt goto CreateFile
 pause
 echo.
 goto main
@@ -37,8 +37,8 @@ goto main
 echo Failed to open file
 echo Would you like to create a new file?
 set /p createFileyn= (y/n)=
-IF "%createFileyn%"==y goto 0004
-IF "%createFileyn%"==n goto main
+IF /I "%createFileyn%"==y goto 0004
+IF /I "%createFileyn%"==n goto main
 cls
 goto CreateFile
 
