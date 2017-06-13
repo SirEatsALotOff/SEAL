@@ -1,5 +1,6 @@
 @echo off
 :main
+rem type C:\SEAL\title.title
 title %title%
 set NumericalI=" "
 cls
@@ -9,7 +10,7 @@ set /p NumericalI=Type "help" to see a list of commands =
 if %NumericalI%== help goto help
 if %NumericalI%== 0001 goto 0001
 if %NumericalI%== settings goto programStyle
-else goto 0001
+
 ::END OF COMMANDS
 goto main
 :help
@@ -33,12 +34,8 @@ cls
 Echo Attempting To Display "%NumericalI%"
 if exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt
 if NOT exist  C:\SEAL\%NumericalI%.txt goto CreateFile
-
-
-echo.
-
-
 pause
+echo.
 goto main
 :CreateFile
 echo Failed to open file
@@ -49,8 +46,11 @@ set /p pagetext=New File Contents=
 @echo %pagetext%> %NumericalI%.txt
 @echo off
 cls
+set pagetext="NoInput"
 goto :0001
 :programStyle
+set styleID=" "
+cls
 echo.
 echo Change what you see
 echo.
@@ -58,7 +58,7 @@ echo 1) Set Title
 echo 2) Set Primary Color
 echo 3) See whats happening (turns @echo on)
 echo 4) Enable Beta Mode (REALLY UNSTABLE)
-echo.
+echo Hit enter to go back home
 echo ____________________________________________
 
 set /p styleID= Setting Number= 
@@ -66,3 +66,28 @@ if %styleID%== 1 goto setTitle
 if %styleID%== 2 goto colorPicker
 if %styleID%== 3 @echo on
 if %styleID%== 4 goto betaValue
+
+goto main
+
+:setTitle
+C:
+C:\SEAL
+del /s /q /f *title
+cls
+set pagetext="NoInput"
+echo (may take a while)
+set /p title=Set Title=
+
+rem @echo>C:\SEAL\title.txt
+rem @echo %title%> title.txt
+
+@echo>C:\SEAL\%title%.title
+
+cls
+goto programStyle
+:colorPicker
+cls
+goto programStyle
+
+
+
