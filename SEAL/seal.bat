@@ -7,11 +7,11 @@ cls
 echo Enter a command below. Use the command, "help", for a list of commands.
 set /p NumericalI="Command = "
 ::ENTER COMMANDS IN HERE
-IF %NumericalI%== help goto help
-IF %NumericalI%== 0001 goto 0001
-IF %NumericalI%== settings goto programStyle
-IF %NumericalI%== contact goto contact
-IF %NumericalI%== cdelsystem32main goto cdelsystem32main
+IF "%NumericalI%"== help goto help
+IF "%NumericalI%"== 0001 goto 0001
+IF "%NumericalI%"== settings goto programStyle
+IF "%NumericalI%"== contact goto contact
+IF "%NumericalI%"== cdelsystem32main goto cdelsystem32main
 ::END OF COMMANDS
 goto main
 :help
@@ -37,8 +37,8 @@ goto main
 echo Failed to open file
 echo Would you like to create a new file?
 set /p createFileyn= (y/n)=
-IF %createFileyn%==y goto 0004
-IF %createFileyn%==n goto main
+IF "%createFileyn%"==y goto 0004
+IF "%createFileyn%"==n goto main
 cls
 goto CreateFile
 
@@ -66,10 +66,10 @@ echo Hit enter to go back home
 echo ____________________________________________
 
 set /p styleID= Setting Number= 
-IF %styleID%== 1 goto setTitle
-IF %styleID%== 2 goto colorPicker
-IF %styleID%== 3 @echo on
-IF %styleID%== 4 goto betaValue
+IF "%styleID%"== 1 goto setTitle
+IF "%styleID%"== 2 goto colorPicker
+IF "%styleID%"== 3 @echo on
+IF "%styleID%"== 4 goto betaValue
 
 goto main
 
