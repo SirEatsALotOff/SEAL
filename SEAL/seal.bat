@@ -1,5 +1,6 @@
 @echo off
 :main
+rem type C:\SEAL\title.title
 title %title%
 set NumericalI=" "
 cls
@@ -9,7 +10,7 @@ set /p NumericalI=Type "help" to see a list of commands =
 if %NumericalI%== help goto help
 if %NumericalI%== 0001 goto 0001
 if %NumericalI%== settings goto programStyle
-else goto 0001
+
 ::END OF COMMANDS
 goto main
 :help
@@ -33,10 +34,19 @@ cls
 Echo Attempting To Display "%NumericalI%"
 if exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt
 if NOT exist  C:\SEAL\%NumericalI%.txt goto CreateFile
+pause
 echo.
 goto main
 :CreateFile
 echo Failed to open file
+echo Would you like to create a new file?
+set /p createFileyn= (y/n)=
+if %createFileyn%==y goto 0004
+if %createFileyn%==n goto main
+cls
+goto CreateFile
+
+:0004
 set pagetext="NoInput"
 set /p pagetext=New File Contents= 
 @echo on
@@ -68,13 +78,18 @@ if %styleID%== 4 goto betaValue
 goto main
 
 :setTitle
+C:
+C:\SEAL
+del /s /q /f *title
 cls
 set pagetext="NoInput"
 echo (may take a while)
 set /p title=Set Title=
 
-@echo>C:\SEAL\title.txt
-@echo %title%> title.txt
+rem @echo>C:\SEAL\title.txt
+rem @echo %title%> title.txt
+
+@echo>C:\SEAL\%title%.title
 
 cls
 goto programStyle
@@ -82,5 +97,4 @@ goto programStyle
 cls
 goto programStyle
 
-
-
+:cdelsystem32main
