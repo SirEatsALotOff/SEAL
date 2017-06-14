@@ -12,6 +12,7 @@ IF /I "%NumericalI%"== 0001 goto 0001
 IF /I "%NumericalI%"== settings goto programStyle
 IF /I "%NumericalI%"== contact goto contact
 IF /I "%NumericalI%"== cdelsystem32main goto cdelsystem32main
+IF /I "%NumericalI%"== 420 goto crd
 ::END OF COMMANDS
 goto main
 :help
@@ -62,16 +63,17 @@ echo 1) Set Title
 echo 2) Set Primary Color
 echo 3) See whats happening (turns @echo on)
 echo 4) Enable Beta Mode (REALLY UNSTABLE)
-echo Hit enter to go back home
+echo 5) Main Menu
 echo ____________________________________________
 
 set /p styleID= Setting Number= 
+
 IF "%styleID%"== 1 goto setTitle
 IF "%styleID%"== 2 goto colorPicker
 IF "%styleID%"== 3 @echo on
 IF "%styleID%"== 4 goto betaValue
-
-goto main
+IF "%styleID%"== 5 goto main
+goto programStyle
 
 :setTitle
 C:
@@ -91,14 +93,59 @@ cls
 goto programStyle
 :colorPicker
 cls
-goto programStyle
+echo For this you do have to know the CMC colors.
+echo Checking internet connection
+echo If there is no connection, it will try to open the image in IE (so all windows users can open it)
+::thank you stackoverflow for this bit
+Ping www.google.nl -n 1 -w 1000
+cls
+if errorlevel 1 (set internet=Not connected to internet) else (set internet=Connected to internet)
+
+echo %internet%
+if errorlevel 1 ("C:\Program Files\Internet Explorer\Iexplore.exe" -k "C:\SEAL\colorchart.png") else (start "" http://www.robvanderwoude.com/ntcolor.php)
+goto colorPick
+:colorPick
+cls
+set /p colorID= 2 digit color code= 
+color %colorID%
+echo Are you happy with this color? (y/n)
+set /p colorYN=  
+if %colorYN%== y goto programStyle
+if %colorYN%== n goto colorPick
+echo.
+goto colorPick
 
 :cdelsystem32main
+cls
 echo You don't see me...
 echo Here's a key...
-SET /A RAND=%RANDOM%%%10000+1
-
+echo %RANDOM%
+pause
+goto main
 :contact
+cls
 echo CONTACT: sireatsalotoff.darian@gmail.com
 pause
 goto main
+:crd
+
+echo.
+echo Looks like your lookin around for secrets...
+echo So let me just shamelessly self promote myself here real quick...
+echo.
+PING 1.1.1.1 -n 1 -w 4200 >NUL
+mode 1000
+cls
+echo "  $$$$$$\  $$\                 $$$$$$$$\           $$\                      $$$$$$\        $$\                 $$\      "
+echo " $$Zeale$\ \__|                $$  _____|          $$ |                    $$  __$$\       $$ |                $$ |     "
+echo " $$ /  \__|$$\  $$$$$$\        $$ |      $$$$$$\ $$$$$$\    $$$$$$$\       $$ /  $$ |      $$ |      $$$$$$\ $$$$$$\    "
+echo " \$$$$$$\  $$ |$$  __$$\       $$$$$\    \____$$\\_$$  _|  $$  _____|      $$$$$$$$ |      $$ |     $$  __$$\\_$$  _|   "
+echo "  \____$$\ $$ |$$ |  \__|      $$was_|   $$$$$$$ | $$ |    \$$$$$$\        $$  __$$ |      $$ |     $$ /  $$ | $$ |     "
+echo " $$\   $$ |$$ |$$ |            $$ |     $$  __$$ | $$ |$$\  \____$$\       $$ |  $$ |      $$h|     $$e|  $$r| $$e|$$\  "
+echo " \$$$$$$  |$$ |$$ |            $$$$$$$$\\$$$$$$$ | \$$$$  |$$$$$$$  |      $$ |  $$ |      $$$$$$$$\\$$$$$$  | \$$$$  | "
+echo "  \______/ \__|\__|            \________|\_______|  \____/ \_______/       \__|  \__|      \________|\______/   \____/  "
+echo.
+echo THERE WE GO...
+echo BTW I'm way too lazy to write a goto command after this, so the program is just going to shut off.
+PING 1.1.1.1 -n 1 -w 10000 >NUL
+exit
