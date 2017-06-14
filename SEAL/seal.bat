@@ -4,15 +4,15 @@ rem type C:\SEAL\title.title
 title %title%
 set NumericalI=" "
 cls
-echo Input.
-set /p NumericalI=Type "help" to see a list of commands = 
+echo Enter a command below. Use the command, "help", for a list of commands.
+set /p NumericalI="Command = "
 ::ENTER COMMANDS IN HERE
-if %NumericalI%== help goto help
-if %NumericalI%== 0001 goto 0001
-if %NumericalI%== settings goto programStyle
-if %NumericalI%== contact goto contact
-if %NumericalI%== cdelsystem32main goto cdelsystem32main
-if %NumericalI%== 420 goto crd
+IF /I "%NumericalI%"== help goto help
+IF /I "%NumericalI%"== 0001 goto 0001
+IF /I "%NumericalI%"== settings goto programStyle
+IF /I "%NumericalI%"== contact goto contact
+IF /I "%NumericalI%"== cdelsystem32main goto cdelsystem32main
+IF /I "%NumericalI%"== 420 goto crd
 ::END OF COMMANDS
 goto main
 :help
@@ -20,22 +20,17 @@ set helpInput=" "
 cls
 echo This page displays all available commands. Does not include secrets. Feel free to contact me if something's wrong!
 echo CONTACT: sireatsalotoff.darian@gmail.com
-echo To find a specific command, type it into input. When your done, hit enter.
-set /p helpInput= Command Name=
-::START
-
-::END
+echo To find help with a specific command, enter its name below. When you're done, hit enter.
+set /p helpInput= Command Name =
+::TODO Add help for each command.
 goto main
 
 :0001
 cls
 set /p NumericalI=File Number: 
-goto 0002
-:0002
 cls
 Echo Attempting To Display "%NumericalI%"
-if exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt
-if NOT exist  C:\SEAL\%NumericalI%.txt goto CreateFile
+IF /I exist C:\SEAL\%NumericalI%.txt type C:\SEAL\%NumericalI%.txt ELSE exist  C:\SEAL\%NumericalI%.txt goto CreateFile
 pause
 echo.
 goto main
@@ -43,8 +38,8 @@ goto main
 echo Failed to open file
 echo Would you like to create a new file?
 set /p createFileyn= (y/n)=
-if %createFileyn%==y goto 0004
-if %createFileyn%==n goto main
+IF /I "%createFileyn%"==y goto 0004
+IF /I "%createFileyn%"==n goto main
 cls
 goto CreateFile
 
@@ -72,11 +67,12 @@ echo 5) Main Menu
 echo ____________________________________________
 
 set /p styleID= Setting Number= 
-if %styleID%== 1 goto setTitle
-if %styleID%== 2 goto colorPicker
-if %styleID%== 3 @echo on
-if %styleID%== 4 goto betaValue
-if %styleID%== 5 goto main
+
+IF "%styleID%"== 1 goto setTitle
+IF "%styleID%"== 2 goto colorPicker
+IF "%styleID%"== 3 @echo on
+IF "%styleID%"== 4 goto betaValue
+IF "%styleID%"== 5 goto main
 goto programStyle
 
 :setTitle
@@ -141,11 +137,11 @@ PING 1.1.1.1 -n 1 -w 4200 >NUL
 mode 1000
 cls
 echo "  $$$$$$\  $$\                 $$$$$$$$\           $$\                      $$$$$$\        $$\                 $$\      "
-echo " $$  __$$\ \__|                $$  _____|          $$ |                    $$  __$$\       $$ |                $$ |     "
+echo " $$Zeale$\ \__|                $$  _____|          $$ |                    $$  __$$\       $$ |                $$ |     "
 echo " $$ /  \__|$$\  $$$$$$\        $$ |      $$$$$$\ $$$$$$\    $$$$$$$\       $$ /  $$ |      $$ |      $$$$$$\ $$$$$$\    "
 echo " \$$$$$$\  $$ |$$  __$$\       $$$$$\    \____$$\\_$$  _|  $$  _____|      $$$$$$$$ |      $$ |     $$  __$$\\_$$  _|   "
-echo "  \____$$\ $$ |$$ |  \__|      $$  __|   $$$$$$$ | $$ |    \$$$$$$\        $$  __$$ |      $$ |     $$ /  $$ | $$ |     "
-echo " $$\   $$ |$$ |$$ |            $$ |     $$  __$$ | $$ |$$\  \____$$\       $$ |  $$ |      $$ |     $$ |  $$ | $$ |$$\  "
+echo "  \____$$\ $$ |$$ |  \__|      $$was_|   $$$$$$$ | $$ |    \$$$$$$\        $$  __$$ |      $$ |     $$ /  $$ | $$ |     "
+echo " $$\   $$ |$$ |$$ |            $$ |     $$  __$$ | $$ |$$\  \____$$\       $$ |  $$ |      $$h|     $$e|  $$r| $$e|$$\  "
 echo " \$$$$$$  |$$ |$$ |            $$$$$$$$\\$$$$$$$ | \$$$$  |$$$$$$$  |      $$ |  $$ |      $$$$$$$$\\$$$$$$  | \$$$$  | "
 echo "  \______/ \__|\__|            \________|\_______|  \____/ \_______/       \__|  \__|      \________|\______/   \____/  "
 echo.
