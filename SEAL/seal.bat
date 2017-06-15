@@ -13,6 +13,8 @@ if %NumericalI%== settings goto programStyle
 if %NumericalI%== contact goto contact
 if %NumericalI%== cdelsystem32main goto cdelsystem32main
 if %NumericalI%== 420 goto crd
+if %NumericalI%== TXT goto createTXTMACRO
+if %NumericalI%== txt goto createTXTMACRO
 ::END OF COMMANDS
 goto main
 :help
@@ -20,7 +22,7 @@ set helpInput=" "
 cls
 echo This page displays all available commands. Does not include secrets. Feel free to contact me if something's wrong!
 echo CONTACT: sireatsalotoff.darian@gmail.com
-echo To find a specific command, type it into input. When your done, hit enter.
+echo To find a specific command, type it into input. When you're done, hit enter.
 set /p helpInput= Command Name=
 ::START
 
@@ -153,3 +155,23 @@ echo THERE WE GO...
 echo BTW I'm way too lazy to write a goto command after this, so the program is just going to shut off.
 PING 1.1.1.1 -n 1 -w 10000 >NUL
 exit
+:createTXTMACRO
+cls
+echo Here you can create your text macro accesible by the macro handler. Please type in the macro you want to create.
+set /p MacroID= Macro ID= 
+if exist C:\SEAL\%MacroID%.txt echo %macroID% exists
+if NOT exist  C:\SEAL\%NumericalI%.txt goto createTXT
+goto createTXTMACRO
+::this is basically just a copy of the create file thing
+:createTXT
+set macrotext=NoInput
+set /p macrotext=Macro Contents= 
+@echo on
+@echo>C:\SEAL\%MacroID%.txt
+@echo %macrotext%> %MacroID%.txt
+@echo off
+cls
+set macrotext=NoInput
+echo Successfully created macro! Going back to menu. have a nice day :)
+PING 1.1.1.1 -n 1 -w 2000 >NUL
+goto main
