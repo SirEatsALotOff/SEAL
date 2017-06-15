@@ -23,6 +23,10 @@ set /p txtmcro=<C:\SEAL\%macroID%.txt
 echo "%txtmcro%" successfully copied! (use CTRL - V to paste anywhere)
 echo|set /p=%txtmcro%|clip
 cls
+set macroID " "
 goto main
 ::I'll be working on the program opening macros next, but the user input is going to be a huge pain because I don't want you to have to type
 ::an entire directory just to use it.
+:prgMacro
+::now THIS is going to be a huge pain on seal.bat code. This part is easy.
+set /p pgrmcro=<C:\SEAL\%macroID%.smcr
