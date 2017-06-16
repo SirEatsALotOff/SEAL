@@ -1,7 +1,9 @@
 @echo off
 :main
+set /p title=<C:\SEAL\title.title
 rem type C:\SEAL\title.title
 title %title%
+set title="SEAL V.0.0.02"
 set NumericalI=" "
 cls
 echo Input.
@@ -25,6 +27,13 @@ echo CONTACT: sireatsalotoff.darian@gmail.com
 echo To find a specific command, type it into input. When you're done, hit enter.
 set /p helpInput= Command Name=
 ::START
+echo 0001 = Read a text file
+echo settings = Display settings
+echo contact = Displays email
+echo txt or TXT = Create text macro
+echo.
+echo FOR MACRO HANDLER
+echo
 
 ::END
 goto main
@@ -89,13 +98,14 @@ cls
 set pagetext="NoInput"
 echo (may take a while)
 set /p title=Set Title=
-
 rem @echo>C:\SEAL\title.txt
 rem @echo %title%> title.txt
-
-@echo>C:\SEAL\%title%.title
-
+@echo on
+@echo>C:\SEAL\title.title
+@echo %title%> title.title
+@echo off
 cls
+
 goto programStyle
 :colorPicker
 cls
@@ -175,3 +185,9 @@ set macrotext=NoInput
 echo Successfully created macro! Going back to menu. have a nice day :)
 PING 1.1.1.1 -n 1 -w 2000 >NUL
 goto main
+
+
+::for /f "tokens=*" %%a in (input.txt) do (
+::  echo line=%%a
+::)
+::pause
