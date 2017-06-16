@@ -1,3 +1,4 @@
+::THIS FILE HAS BEEN DISCONTINUED
 ::dta fighting board display
 mode 1000
 @echo off
