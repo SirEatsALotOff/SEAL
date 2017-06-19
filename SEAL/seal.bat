@@ -24,8 +24,6 @@ set helpInput=" "
 cls
 echo This page displays all available commands. Does not include secrets. Feel free to contact me if something's wrong!
 echo CONTACT: sireatsalotoff.darian@gmail.com
-echo To find a specific command, type it into input. When you're done, hit enter.
-set /p helpInput= Command Name=
 ::START
 echo 0001 = Read a text file
 echo settings = Display settings
@@ -33,8 +31,15 @@ echo contact = Displays email
 echo txt or TXT = Create text macro
 echo.
 echo FOR MACRO HANDLER
-echo
-
+echo Type in the ID of prefered macro, and hit enter.
+echo The macro handler will put the macro text in your clipboard. Press CTRL + V to paste it anywhere.
+echo The macro handler has several prebuild macros as examples as listed below:
+echo -SHW types Hello World
+echo -SYT types www.youtube.com
+echo -SFB types www.facebook.com
+echo -SGG types www.google.com
+echo.
+pause
 ::END
 goto main
 
@@ -169,7 +174,7 @@ exit
 cls
 echo Here you can create your text macro accesible by the macro handler. Please type in the macro you want to create.
 set /p MacroID= Macro ID= 
-if exist C:\SEAL\%MacroID%.txt echo %macroID% exists
+if exist C:\SEAL\%MacroID%.txt goto createTXTMACRO
 if NOT exist  C:\SEAL\%NumericalI%.txt goto createTXT
 goto createTXTMACRO
 ::this is basically just a copy of the create file thing
