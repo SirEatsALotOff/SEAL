@@ -7,7 +7,7 @@
 #### Soon, this will be an incredibly useful batch tool created with hotkey expansion in mind. :) If you ever run out of extra keys, or **don't have any at all**, this program will be *perfect*.
 
 # Contribution
-## (Please see the CONTRIBUTING.md file for the latest information on contributing)
+### (Please see the CONTRIBUTING.md file for the latest information on contributing)
 FOR THOSE WHO WANT TO CONTRIBUTE, create your version as a seperate file, so I can load it in as the BETA MODE.
 I haven't programmed seriously in batch in years, so I have to brush up on a lot of things. 
 
