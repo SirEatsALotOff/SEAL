@@ -17,6 +17,10 @@ if %NumericalI%== cdelsystem32main goto cdelsystem32main
 if %NumericalI%== 420 goto crd
 if %NumericalI%== TXT goto createTXTMACRO
 if %NumericalI%== txt goto createTXTMACRO
+if %NumericalI%== github (
+	echo [92mOpening github link...
+	start "" https://github.com/SirEatsALotOff/SEAL || [92m Opening the link has failed...
+)
 ::END OF COMMANDS
 goto main
 :help
