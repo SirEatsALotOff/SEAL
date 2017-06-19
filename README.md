@@ -1,4 +1,7 @@
-# SEAL
+<!--Your header-->
+<h1 align="center">Seal</h1>
+<!--Your image-->
+<h2 align="center"><img src="https://avatars3.githubusercontent.com/u/23411462?v=3&s=460" height=150px width=150px></img></h2>
 Soon to be an incredibly useful batch tool created with hotkey expansion in mind. If you ever run out of extra keys, or don't have any at all, this program will be perfect.
 FOR THOSE WHO WANT TO CONTRIBUTE, create your version as a seperate file, so I can load it in as the BETA MODE.
 I haven't programmed seriously in batch in years, so I have to brush up on a lot of things. I̶ ̶p̶l̶a̶n̶ ̶o̶n̶ ̶h̶a̶n̶d̶l̶i̶n̶g̶ ̶t̶h̶e̶ ̶m̶a̶c̶r̶o̶ ̶h̶a̶n̶d̶l̶e̶r̶ ̶n̶e̶x̶t̶,̶ ̶b̶u̶t̶ ̶t̶h̶e̶r̶e̶ ̶w̶i̶l̶l̶ ̶b̶e̶ ̶n̶o̶ ̶e̶a̶s̶y̶ ̶w̶a̶y̶ ̶t̶o̶ ̶a̶d̶d̶ ̶m̶a̶c̶r̶o̶s̶.̶ ̶I̶t̶ ̶w̶i̶l̶l̶ ̶w̶r̶i̶t̶e̶ ̶a̶ ̶.̶S̶M̶A̶C̶ ̶f̶i̶l̶e̶,̶ ̶w̶i̶t̶h̶ ̶t̶h̶e̶ ̶t̶r̶i̶g̶g̶e̶r̶ ̶k̶e̶y̶ ̶b̶e̶i̶n̶g̶ ̶t̶h̶e̶ ̶t̶i̶t̶l̶e̶.̶ ̶e̶x̶.̶ ̶"̶o̶p̶e̶n̶c̶h̶r̶o̶m̶e̶.̶s̶m̶a̶c̶"̶
