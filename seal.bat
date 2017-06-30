@@ -19,6 +19,7 @@ if %NumericalI%== TXT goto createTXTMACRO
 if %NumericalI%== txt goto createTXTMACRO
 if %NumericalI%== macrohandler call MacroHandler.bat
 if %NumericalI%== PasswordLocker call PasswordLocker.bat
+if %numericalI%== Predict goto RPre
 cls
 ::END OF COMMANDS
 goto main
@@ -32,6 +33,7 @@ echo 0001 = Read a text file
 echo settings = Display settings
 echo contact = Displays email
 echo txt or TXT = Create text macro
+echo Predict = Opens up a sarcastic magic 8 ball.
 echo.
 echo FOR MACRO HANDLER
 echo Type in the ID of prefered macro, and hit enter.
@@ -192,6 +194,23 @@ cls
 set macrotext=NoInput
 echo Successfully created macro! Going back to menu. have a nice day :)
 PING 1.1.1.1 -n 1 -w 2000 >NUL
+goto main
+:RPre
+cls
+echo Please ask your question here, and the program will totally try to answer it, and not completely ignore it.
+set /p x= What is your question? 
+set x=" "
+::Fuck your question ya freakin loser
+SET /A RPre=%RANDOM%%%8+1
+if %RPre%== 1 echo You are correct
+if %RPre%== 2 echo I have a good feeling
+if %RPre%== 3 echo You're going to fail miserably
+if %RPre%== 4 echo Everyone believes in you
+if %RPre%== 5 echo Good luck with that
+if %RPre%== 6 echo Hello World
+if %RPre%== 7 echo Nobody freakin cares
+if %RPre%== 8 echo The rediculous question you asked is not even worth my time to answer, nothing in this universe matters, you don't exist, reality is a construct. That is all.
+pause
 goto main
 
 
