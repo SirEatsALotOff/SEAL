@@ -1,10 +1,13 @@
 @echo off
+SETLOCAL EnableDelayedExpansion
 :main
 set /p title=<C:\SEAL\title.title
 rem type C:\SEAL\title.title
 title %title%
+set /p color=<C:\SEAL\color.title
 set title="SEAL V.0.0.02"
 set NumericalI=" "
+color %color%
 cls
 echo Input.
 set /p NumericalI=Type "help" to see a list of commands = 
@@ -19,7 +22,9 @@ if %NumericalI%== TXT goto createTXTMACRO
 if %NumericalI%== txt goto createTXTMACRO
 if %NumericalI%== macrohandler call MacroHandler.bat
 if %NumericalI%== PasswordLocker call PasswordLocker.bat
-if %numericalI%== Predict goto RPre
+if %NumericalI%== Predict goto RPre
+if %NumericalI%== Info goto GetInfo
+
 cls
 ::END OF COMMANDS
 goto main
@@ -126,7 +131,6 @@ echo If there is no connection, it will try to open the image in IE (so all wind
 Ping www.google.nl -n 1 -w 1000
 cls
 if errorlevel 1 (set internet=Not connected to internet) else (set internet=Connected to internet)
-
 echo %internet%
 if errorlevel 1 ("C:\Program Files\Internet Explorer\Iexplore.exe" -k "C:\SEAL\colorchart.png") else (start "" http://www.robvanderwoude.com/ntcolor.php)
 goto colorPick
@@ -134,6 +138,8 @@ goto colorPick
 cls
 set /p colorID= 2 digit color code= 
 color %colorID%
+@echo>C:\SEAL\color.title
+@echo %colorID%> color.title
 echo Are you happy with this color? (y/n)
 set /p colorYN=  
 if %colorYN%== y goto programStyle
@@ -213,7 +219,48 @@ if %RPre%== 8 echo The rediculous question you asked is not even worth my time t
 pause
 goto main
 
-
+:GetInfo
+color 0f
+for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (
+  set "DEL=%%a"
+)
+::Thanks to this post for the multicolored text I've been avoiding!
+:: https://stackoverflow.com/questions/4339649/how-to-have-multiple-colors-in-a-windows-batch-file
+cls
+::This tag is like a really advanced systeminfo, that can get other connected computers information
+echo ______________________________________________________________________________________
+echo.
+call :ColorText 0C "Hello, and welcome to the SEAL PC Information core."
+echo.
+call :ColorText 0a "Here you will be able to read SEAL files, system files, and other computers information."
+echo.
+echo So tell me, what would you like to do?
+echo.
+call :ColorText 0b "1)"
+call :ColorText 0d " My System"
+echo.
+call :ColorText 0b "2)"
+call :ColorText 0d " SEAL Files"
+echo.
+call :ColorText 0b "3)"
+call :ColorText 0d " Another PC"
+echo.
+call :ColorText 0b "4)"
+call :ColorText 0d " Go Back"
+echo.
+set /p InfoID= Number:  
+if %InfoID%== 1 goto System
+if %InfoID%== 2 goto SealSystem
+if %InfoID%== 3 goto OtherSystem
+if %InfoID%== 4 goto main
+goto GetInfo
+:ColorText
+echo off
+<nul set /p ".=%DEL%" > "%~2"
+findstr /v /a:%1 /R "^$" "%~2" nul
+del "%~2" > nul 2>&1
+goto :eof
+::I really don't like tokens
 ::for /f "tokens=*" %%a in (input.txt) do (
 ::  echo line=%%a
 ::)
