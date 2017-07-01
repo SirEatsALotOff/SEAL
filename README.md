@@ -16,3 +16,15 @@ I̶ ̶p̶l̶a̶n̶ ̶o̶n̶ ̶h̶a̶n̶d̶l̶i̶n̶g̶ ̶t̶h̶e̶ ̶m̶a̶c̶r�
 I̶n̶s̶i̶d̶e̶ ̶w̶i̶l̶l̶ ̶b̶e̶ ̶t̶h̶e̶ ̶i̶n̶s̶t̶r̶u̶c̶t̶i̶o̶n̶s̶ ̶f̶o̶r̶ ̶t̶h̶e̶ ̶m̶a̶c̶r̶o̶ ̶h̶a̶n̶d̶l̶e̶r̶ ̶t̶o̶ ̶d̶e̶a̶l̶ ̶w̶i̶t̶h̶.̶ ̶F̶o̶r̶ ̶n̶o̶w̶ ̶I̶ ̶w̶i̶l̶l̶ ̶t̶r̶y̶ ̶t̶o̶ ̶m̶a̶k̶e̶ ̶a̶n̶ ̶e̶a̶s̶y̶ ̶t̶o̶ ̶u̶n̶d̶e̶r̶s̶t̶a̶n̶d̶ ̶c̶o̶n̶f̶i̶g̶ ̶i̶n̶s̶i̶d̶e̶ ̶t̶h̶e̶ ̶m̶a̶c̶r̶o̶ ̶h̶a̶n̶d̶l̶e̶r̶.̶
 I HAVE CREATED THE TEXT MACRO HANDLER!
 All you have to do to create the macro is go into seal.bat, type txt or TXT, and enter in the information. Once you've done that, you can set up the Macro Handler on an extra button or a hotkey, run it, and enter in your macros ID. It copies it into your clipboard, so CTRL V to paste where ever you need it.
+# To Install
+Download the .ZIP file off of github, and extract onto your desktop. Run "SEALINSTALLER." Tell your PC its fine to download, for some reason all of the computers I've tested this on hate my file.
+
+Click Yes, unless you dont want to of course...
+
+When it asks for the location to place the files, type (without quotes) "C:\SEAL".
+
+Click Yes. Click OK.
+
+To Create The Shortcuts:
+http://www.basiccomputerinformation.ca/create-desktop-shortcut/#filefolder
+Do that crap for MacroHandler.bat and seal.bat
