@@ -39,6 +39,7 @@ echo settings = Display settings
 echo contact = Displays email
 echo txt or TXT = Create text macro
 echo Predict = Opens up a sarcastic magic 8 ball.
+echo Info = Menu that allows you to collect information about PCs on your network, and other SEAL files.
 echo.
 echo FOR MACRO HANDLER
 echo Type in the ID of prefered macro, and hit enter.
@@ -265,3 +266,46 @@ goto :eof
 ::  echo line=%%a
 ::)
 ::pause
+
+:System
+cls
+systeminfo
+echo.
+echo.
+echo Now for a more understandable version.
+echo.
+echo Checking your system info, Please wating... 
+systeminfo | findstr /c:"Host Name" 
+systeminfo | findstr /c:"Domain" 
+systeminfo | findstr /c:"OS Name" 
+systeminfo | findstr /c:"OS Version" 
+systeminfo | findstr /c:"System Manufacturer" 
+systeminfo | findstr /c:"System Model" 
+systeminfo | findstr /c:"System type" 
+systeminfo | findstr /c:"Total Physical Memory" 
+ipconfig | findstr IPv4
+echo.
+echo Hard Drive Space: 
+wmic diskdrive get size
+echo. 
+echo.
+echo Service Tag: 
+wmic bios get serialnumber
+echo. 
+echo. 
+echo CPU: 
+wmic cpu get name
+pause
+goto GetInfo
+:SealSystem
+cls
+echo These are the files currently inside of SEAL.
+dir /b /a-d
+echo.
+echo Any text files are text macros.
+echo Ink files are shortcuts.
+echo title files are user preferences
+pause
+goto GetInfo
+:OtherSystem
+goto GetInfo
