@@ -24,7 +24,7 @@ if %NumericalI%== macrohandler call MacroHandler.bat
 if %NumericalI%== PasswordLocker call PasswordLocker.bat
 if %NumericalI%== Predict goto RPre
 if %NumericalI%== Info goto GetInfo
-
+if %NumericalI%== startup goto startUp
 cls
 ::END OF COMMANDS
 goto main
@@ -239,15 +239,21 @@ echo So tell me, what would you like to do?
 echo.
 call :ColorText 0b "1)"
 call :ColorText 0d " My System"
+PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "2)"
 call :ColorText 0d " SEAL Files"
+
+PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "3)"
 call :ColorText 0d " Another PC"
+
+PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "4)"
 call :ColorText 0d " Go Back"
+PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 set /p InfoID= Number:  
 if %InfoID%== 1 goto System
@@ -309,3 +315,9 @@ pause
 goto GetInfo
 :OtherSystem
 goto GetInfo
+:startUp
+echo Here you can run the installer that tells windows to open SEAL files on startup.
+start C:\SEAL\startprompt.vbs
+pause
+PING 1.1.1.1 -n 1 -w 2000 >NUL
+start C:\SEAL\SEALSTART.exe
