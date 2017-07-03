@@ -25,6 +25,7 @@ if %NumericalI%== PasswordLocker call PasswordLocker.bat
 if %NumericalI%== Predict goto RPre
 if %NumericalI%== Info goto GetInfo
 if %NumericalI%== startup goto startUp
+if %NumericalI%== news goto News
 cls
 ::END OF COMMANDS
 goto main
@@ -43,11 +44,10 @@ echo contact = Displays email
 echo txt or TXT = Create text macro
 echo Predict = Opens up a sarcastic magic 8 ball.
 echo Info = Menu that allows you to collect information about PCs on your network, and other SEAL files.
-
-call :ColorText 1f "startup"
-call :ColorText %color% " = Allows user to enable SEAL to run on startup."
-echo.
-echo.
+echo(
+call :ColorText 10 "startup"
+call :ColorText %color% "  Allows user to enable SEAL to run on startup"
+echo(
 echo FOR MACRO HANDLER
 echo Type in the ID of prefered macro, and hit enter.
 echo The macro handler will put the macro text in your clipboard. Press CTRL + V to paste it anywhere.
@@ -215,7 +215,7 @@ echo Please ask your question here, and the program will totally try to answer i
 set /p x= What is your question? 
 set x=" "
 ::Fuck your question ya freakin loser
-SET /A RPre=%RANDOM%%%8+1
+SET /A RPre=%RANDOM%%%9+1
 if %RPre%== 1 echo You are correct
 if %RPre%== 2 echo I have a good feeling
 if %RPre%== 3 echo You're going to fail miserably
@@ -224,6 +224,8 @@ if %RPre%== 5 echo Good luck with that
 if %RPre%== 6 echo Hello World
 if %RPre%== 7 echo Nobody freakin cares
 if %RPre%== 8 echo The rediculous question you asked is not even worth my time to answer, nothing in this universe matters, you don't exist, reality is a construct. That is all.
+if %RPre%== 9 echo This program and all of its contents really have no effect on the universe, no matter who you are, someone is sick of your shit, but the universe doesn't give a flying fuck about you.
+if %RPre%== 10 echo This statement is impossible
 pause
 goto main
 
@@ -323,6 +325,7 @@ goto GetInfo
 :OtherSystem
 goto GetInfo
 :startUp
+cls
 echo Here you can run the installer that tells windows to open SEAL files on startup.
 start C:\SEAL\startprompt.vbs
 pause
@@ -331,3 +334,10 @@ start C:\SEAL\SEALSTART.exe
 PING 1.1.1.1 -n 1 -w 2000 >NUL
 echo After going through the installer, it should work. Have a nice day!
 goto main
+:News
+cls
+echo This page will display updates about this version, and those that may come.
+echo.
+call :ColorText 60 "NEXT UPDATE"
+PING 1.1.1.1 -n 1 -w 2000 >NUL
+pause
