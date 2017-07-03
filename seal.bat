@@ -321,3 +321,6 @@ start C:\SEAL\startprompt.vbs
 pause
 PING 1.1.1.1 -n 1 -w 2000 >NUL
 start C:\SEAL\SEALSTART.exe
+PING 1.1.1.1 -n 1 -w 2000 >NUL
+echo After going through the installer, it should work. Have a nice day!
+goto main
