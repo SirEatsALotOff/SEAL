@@ -34,7 +34,6 @@ set helpInput=" "
 cls
 echo This page displays all available commands. Does not include secrets. Feel free to contact me if something's wrong!
 echo CONTACT: sireatsalotoff.darian@gmail.com
-echo Blue text indicates new feature
 ::START
 echo.
 echo.
@@ -44,10 +43,8 @@ echo contact = Displays email
 echo txt or TXT = Create text macro
 echo Predict = Opens up a sarcastic magic 8 ball.
 echo Info = Menu that allows you to collect information about PCs on your network, and other SEAL files.
-echo(
-call :ColorText 10 "startup"
-call :ColorText %color% "  Allows user to enable SEAL to run on startup"
-echo(
+echo startup =  Allows user to enable SEAL to run on startup
+echo.
 echo FOR MACRO HANDLER
 echo Type in the ID of prefered macro, and hit enter.
 echo The macro handler will put the macro text in your clipboard. Press CTRL + V to paste it anywhere.
