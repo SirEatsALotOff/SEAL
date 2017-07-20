@@ -254,10 +254,13 @@ PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "3)"
 call :ColorText 0d " Another PC"
+echo.
+call :ColorText 0b "4)"
+call :ColorText 0d " Remote Connect"
 
 PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
-call :ColorText 0b "4)"
+call :ColorText 0b "5)"
 call :ColorText 0d " Go Back"
 PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
@@ -265,8 +268,57 @@ set /p InfoID= Number:
 if %InfoID%== 1 goto System
 if %InfoID%== 2 goto SealSystem
 if %InfoID%== 3 goto OtherSystem
-if %InfoID%== 4 goto main
+if %InfoID%== 4 goto rShut
+if %InfoID%== 5 goto main
 goto GetInfo
+:rShut
+cls
+echo.
+call :ColorText 0d "Remote Menu"
+echo.
+call :ColorText 0d "Type in f to do without user prompt"
+echo.
+call :ColorText 0b "1)"
+call :ColorText 0d " Remote Shutdown"
+echo.
+call :ColorText 0b "2)"
+call :ColorText 0d " Remote Logoff"
+echo.
+call :ColorText 0b "3)"
+call :ColorText 0d " Remote Restart"
+echo.
+set /p RMenu= Number: 
+if %RMenu%== 1 goto reShut
+if %RMenu%== 2 goto reLogf
+if %RMenu%== 3 goto restart
+if %RMenu%== f1 goto freShut
+if %RMenu%== f2 goto freLogf
+if %RMenu%== f3 goto frestart
+goto rShut
+:reShut
+cls
+
+goto rShut
+:reLogf
+cls
+
+goto rlogf
+:restart
+cls
+goto restart
+:freShut
+cls
+
+goto frShut
+:freLogf
+cls
+
+goto frlogf
+:frestart
+cls
+goto frestart
+
+
 :ColorText
 echo off
 <nul set /p ".=%DEL%" > "%~2"
