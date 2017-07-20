@@ -242,23 +242,20 @@ echo.
 call :ColorText 0a "Here you will be able to read SEAL files, system files, and other computers information."
 echo.
 echo So tell me, what would you like to do?
+PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "1)"
 call :ColorText 0d " My System"
-PING 1.1.1.1 -n 1 -w 1500 >NUL
+
 echo.
 call :ColorText 0b "2)"
 call :ColorText 0d " SEAL Files"
-
-PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "3)"
 call :ColorText 0d " Another PC"
 echo.
 call :ColorText 0b "4)"
 call :ColorText 0d " Remote Connect"
-
-PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
 call :ColorText 0b "5)"
 call :ColorText 0d " Go Back"
@@ -287,37 +284,43 @@ echo.
 call :ColorText 0b "3)"
 call :ColorText 0d " Remote Restart"
 echo.
+call :ColorText 0b "4)"
+call :ColorText 0d " Go Back"
 set /p RMenu= Number: 
 if %RMenu%== 1 goto reShut
 if %RMenu%== 2 goto reLogf
 if %RMenu%== 3 goto restart
+if %RMenu%== 4 goto Info
 if %RMenu%== f1 goto freShut
 if %RMenu%== f2 goto freLogf
 if %RMenu%== f3 goto frestart
+if %RMenu%== f4 goto crd
+set RMenu=" "
 goto rShut
 :reShut
 cls
-
+set /p RMenu= Computer Name: 
 goto rShut
 :reLogf
 cls
-
+set /p RMenu= Computer Name: 
 goto rlogf
 :restart
 cls
+set /p RMenu= Computer Name: 
 goto restart
 :freShut
 cls
-
+set /p RMenu= Computer Name: 
 goto frShut
 :freLogf
 cls
-
+set /p RMenu= Computer Name: 
 goto frlogf
 :frestart
 cls
+set /p RMenu= Computer Name: 
 goto frestart
-
 
 :ColorText
 echo off
@@ -376,7 +379,8 @@ goto GetInfo
 :startUp
 cls
 echo Here you can run the installer that tells windows to open SEAL files on startup.
-start C:\SEAL\startprompt.vbs
+echo Just CTRL V the directory, and edit USER to your username
+echo|set /p=C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup|clip
 pause
 PING 1.1.1.1 -n 1 -w 2000 >NUL
 start C:\SEAL\SEALSTART.exe
