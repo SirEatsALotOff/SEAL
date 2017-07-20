@@ -26,6 +26,7 @@ if %NumericalI%== Predict goto RPre
 if %NumericalI%== Info goto GetInfo
 if %NumericalI%== startup goto startUp
 if %NumericalI%== news goto News
+if %NumericalI%== prg goto PRG
 cls
 ::END OF COMMANDS
 goto main
@@ -44,6 +45,7 @@ echo txt or TXT = Create text macro
 echo Predict = Opens up a sarcastic magic 8 ball.
 echo Info = Menu that allows you to collect information about PCs on your network, and other SEAL files.
 echo startup =  Allows user to enable SEAL to run on startup
+echo prg = Create a program macro
 echo.
 echo FOR MACRO HANDLER
 echo Type in the ID of prefered macro, and hit enter.
@@ -394,3 +396,22 @@ echo.
 call :ColorText 60 "NEXT UPDATE"
 PING 1.1.1.1 -n 1 -w 2000 >NUL
 pause
+:PRG
+echo Type in the new program macro ID
+set /p x= ID= 
+if exist %x%.smac goto PRGNEXT
+cls
+goto PRGNEXT
+:PRGNEXT
+cls
+echo.
+echo Copy the directory of your application into the input.
+echo Make sure to include the application name itself.
+explorer C:\Program Files (x86)
+PING 1.1.1.1 -n 1 -w 2000 >NUL
+set /p prgthing= Directory= 
+@echo>C:\SEAL\%x%.smac
+@echo %prgthing%> %x%.smac
+set prgthing=" "
+set x=" "
+goto main
