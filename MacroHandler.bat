@@ -3,6 +3,7 @@ cls
 title Macro Handler V.0.0.02
 ::Macro Handler, this one may require some coding knowledge, sorry about that.
 :main
+cls
 set txtmcount=0
 set prgmcount=0
 echo Create macros by going to SEAL.

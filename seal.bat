@@ -1,5 +1,6 @@
 @echo off
 SETLOCAL EnableDelayedExpansion
+
 :main
 set /p title=<C:\SEAL\title.title
 rem type C:\SEAL\title.title
@@ -260,6 +261,9 @@ call :ColorText 0b "4)"
 call :ColorText 0d " Remote Connect"
 echo.
 call :ColorText 0b "5)"
+call :ColorText 0d " User Info"
+echo.
+call :ColorText 0b "6)"
 call :ColorText 0d " Go Back"
 PING 1.1.1.1 -n 1 -w 1500 >NUL
 echo.
@@ -268,10 +272,24 @@ if %InfoID%== 1 goto System
 if %InfoID%== 2 goto SealSystem
 if %InfoID%== 3 goto OtherSystem
 if %InfoID%== 4 goto rShut
-if %InfoID%== 5 goto main
+if %InfoID%== 5 goto userinfo
+if %InfoID%== 6 goto main
+goto GetInfo
+:userinfo
+cls
+echo Processors: %NUMBER_OF_PROCESSORS%
+echo Computer Name: %computername%
+echo User Domain: %USERDOMAIN%
+echo Date: %date%
+echo Os: %os%
+echo Time: %time%
+echo Username: %USERNAME%
+pause
+cls
 goto GetInfo
 :rShut
 cls
+echo Note this part is under construction
 echo.
 call :ColorText 0d "Remote Menu"
 echo.
