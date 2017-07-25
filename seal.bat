@@ -91,7 +91,7 @@ set /p pagetext=New File Contents=
 @echo off
 cls
 set pagetext="NoInput"
-goto :0001
+goto main
 :programStyle
 set styleID=" "
 cls
