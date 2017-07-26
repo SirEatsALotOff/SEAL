@@ -417,7 +417,7 @@ pause
 :PRG
 echo Type in the new program macro ID
 set /p x= ID= 
-if exist %x%.smac goto PRGNEXT
+if exist %x%.smac goto PRG
 cls
 goto PRGNEXT
 :PRGNEXT
