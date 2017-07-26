@@ -1,5 +1,4 @@
 @echo off
-SETLOCAL EnableDelayedExpansion
 
 :main
 set /p title=<C:\SEAL\title.title
@@ -36,6 +35,7 @@ set helpInput=" "
 cls
 echo This page displays all available commands. Does not include secrets. Feel free to contact me if something's wrong!
 echo CONTACT: sireatsalotoff.darian@gmail.com
+echo [7mHighlighted comments are new commands.[0m
 ::START
 echo.
 echo.
@@ -60,7 +60,7 @@ echo.
 pause
 ::END
 goto main
-
+::rem%ass%
 :0001
 cls
 set /p NumericalI=File Number: 
