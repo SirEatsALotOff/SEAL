@@ -18,13 +18,8 @@ I HAVE CREATED THE TEXT MACRO HANDLER!
 All you have to do to create the macro is go into seal.bat, type txt or TXT, and enter in the information. Once you've done that, you can set up the Macro Handler on an extra button or a hotkey, run it, and enter in your macros ID. It copies it into your clipboard, so CTRL V to paste where ever you need it.
 # To Install
 Download the .ZIP file off of github, and extract onto your desktop. Run "SEALINSTALLER." Tell your PC its fine to download, for some reason all of the computers I've tested this on hate my file.
-
 Click Yes, unless you dont want to of course...
-
 When it asks for the location to place the files, type (without quotes) "C:\SEAL".
-
 Click Yes. Click OK.
-
-To Create The Shortcuts:
-http://www.basiccomputerinformation.ca/create-desktop-shortcut/#filefolder
-Do that crap for MacroHandler.bat and seal.bat
+# To assign a hotkey
+Right click the macrohandler shortcut, got to properties. Under the shortcut tab, find 'Shortcut key:'. Click it, and enter in your prefered hotkey (ex: ctrl+alt+`) Repeat for seal.bat, with a different hotkey.
