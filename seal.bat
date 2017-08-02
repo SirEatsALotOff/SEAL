@@ -1,5 +1,5 @@
 @echo off
-
+call exithandl.bat
 :main
 set /p title=<C:\SEAL\title.title
 rem type C:\SEAL\title.title
@@ -27,8 +27,17 @@ if %NumericalI%== Info goto GetInfo
 if %NumericalI%== startup goto startUp
 if %NumericalI%== news goto News
 if %NumericalI%== prg goto PRG
+if %NumericalI%== DevUni goto universalC
+if %NumericalI%== callp goto callp
 cls
+set NumericalI=" "
 ::END OF COMMANDS
+goto main
+:callp
+cls
+set /p PRID= [7mProgram Name (including extension)~ [0m 
+
+if exist %PRID% call %PRID%
 goto main
 :help
 set helpInput=" "
@@ -47,6 +56,7 @@ echo Predict = Opens up a sarcastic magic 8 ball.
 echo Info = Menu that allows you to collect information about PCs on your network, and other SEAL files.
 echo startup =  Allows user to enable SEAL to run on startup
 echo prg = Create a program macro
+echo [7mcallp = calls any batch file in program ~[0m 
 echo.
 echo FOR MACRO HANDLER
 echo Type in the ID of prefered macro, and hit enter.
@@ -387,7 +397,7 @@ goto GetInfo
 :SealSystem
 cls
 echo These are the files currently inside of SEAL.
-dir /b /a-d
+ 
 echo.
 echo Any text files are text macros.
 echo Ink files are shortcuts.
@@ -432,4 +442,68 @@ set /p prgthing= Directory=
 @echo %prgthing%> %x%.smac
 set prgthing=" "
 set x=" "
+goto main
+:universalC
+::write to specific line, writes on 5th
+::for /F "skip=4 delims=" %i in (test.txt) do echo %i
+::call :TEXTMAN RL 1 main.config 2
+::goto main
+
+
+:TEXTMAN
+:: by Elektro H@cker
+REM SYNTAX:
+::
+:: TEXTMAN [ACTION] [LINE(S)] [FILE] [TEXT]
+::
+:: * [LINE(S)] parameter is Optional for some actions
+:: * [TEXT] parameter is Optional for some actions
+
+
+REM ACTIONS:
+::
+::  AB  = ADD_BEGINNING      * Add text to the beginning of a line.
+::  AE  = ADD_ENDING         * Add text to the end of a line.
+::  E   = ERASE              * Delete a line.
+::  I   = INSERT             * Add a empty line (Or a line with text).
+::  RL  = REPLACE_LINE       * Replace a entire line.
+::  RS  = REPLACE_STRING     * Replace word from line.
+::  RSA = REPLACE_STRING_ALL * Replace word from all lines.
+::  C+  = CHARACTER_PLUS     * Delete the first "X" characters from all lines.
+::  C-  = CHARACTER_LESS     * Delete the last  "X" characters from all lines.
+::  L+  = LINE_PLUS          * Cut the first "X" amount of lines.
+::  L-  = LINE_LESS          * Cut the last  "X" amount of lines.
+::  GL  = GET_LINE           * Delete all except "X" line.
+::  GR  = GET_RANGE          * Delete all except "X" range of lines.
+(SET /A "A=0", "LINE=0", "TOTAL_LINES=0")  &  (CALL :%~1 %* || (ECHO Invalid parameter & Exit /B 1)) & (GOTO:EOF)
+:AB
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "IF NOT "%%LINE%%" EQU "%~2" (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B)>> "%~3.NEW")) ELSE (if "%%B" EQU "" ((Echo %~4)>> "%~3.NEW") ELSE ((Echo %~4%%B)>> "%~3.NEW"))"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:AE
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "IF NOT "%%LINE%%" EQU "%~2" (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B)>> "%~3.NEW")) ELSE ((Echo %%B%~4)>> "%~3.NEW")"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:E
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "IF NOT "%%LINE%%" EQU "%~2" (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B) >> "%~3.NEW"))"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:I
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "IF     "%%LINE%%" EQU "%~2" (IF NOT "%~4" EQU "" ((Echo %~4) >> "%~3.NEW") ELSE (Echo+>> "%~3.NEW"))" & (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B)>> "%~3.NEW"))))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:RL
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "IF NOT "%%LINE%%" EQU "%~2" (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B)>> "%~3.NEW")) ELSE ((Echo %~4)>> "%~3.NEW")"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:RS
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "IF NOT "%%LINE%%" EQU "%~2" (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B)>> "%~3.NEW")) ELSE (CALL SET "STRING=%%B" &&     (if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((CALL ECHO %%STRING:%~4=%~5%%)>> "%~3.NEW")))"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:RSA
+(For /F "tokens=1* delims=]" %%A in ('type "%~2" ^| find /n /v ""') DO (CALL SET "STRING=%%B" && (if "%%B" EQU "" (Echo+>> "%~2.NEW") ELSE ((CALL ECHO %%STRING:%~3=%~4%%)>>"%~2.NEW")))) && (CALL :RENAMER "%~2") & (GOTO:EOF)
+:C+
+(For /F "usebackq tokens=*" %%@ in ("%~3") DO (Call Set   "LINE=%%@" && (CALL ECHO %%LINE:~%~2%% >>      "%~3.NEW"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:C-
+(For /F "usebackq tokens=*" %%@ in ("%~3") DO (Call Set   "LINE=%%@" && (CALL ECHO %%LINE:~0,-%~2%% >>   "%~3.NEW"))) && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:L+
+(Call SET /A "A=%~2") && (Call TYPE "%~3" |@MORE +%%A%% > "%~3.NEW") && (CALL :RENAMER "%~3") & (GOTO:EOF)
+:L-
+(For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (CALL SET /A "TOTAL_LINES+=1")) & (CALL SET /A "TOTAL_LINES-=%~2-1") & (For /F "tokens=1* delims=]" %%A in ('type "%~3" ^| find /n /v ""') DO (Call Set /A "LINE+=1" & Call echo "%%LINE%%"|@FIND "%%TOTAL_LINES%%" >NUL) && (CALL :RENAMER "%~3" && GOTO:EOF) || (Echo %%B >> "%~3.NEW"))
+:GL
+(Call SET /A "A=%~2" && Call SET /A "A-=1") && (Call TYPE "%~3" |@MORE +%%A%% > "%temp%\getline.tmp") && (For /F "tokens=1* delims=]" %%A in ('type "%temp%\getline.tmp" ^| find /n /v ""') DO ((if "%%B" EQU "" (Echo+>> "%~3.NEW") ELSE ((Echo %%B)> "%~3.NEW"))) && ((CALL :RENAMER "%~3") & (GOTO:EOF))) 
+:GR
+(For /F "tokens=1* delims=]" %%A in ('type "%~4" ^| find /n /v ""') DO (Call Set /A "LINE+=1" && (CMD /C "(IF "%%LINE%%" GEQ "%~2" IF "%%LINE%%" LEQ "%~3" (if "%%B" EQU "" (Echo+>> "%~4.NEW") ELSE ((Echo %%B)>> "%~4.NEW"))) && (IF "%%LINE%%" EQU "%~3" Exit /B 1)" || ((CALL :RENAMER "%~4") & (GOTO:EOF)))))
+
+:RENAMER
+(REN "%~1" "%~nx1.BAK") & (MOVE /Y "%~1.BAK" "%TEMP%\" >NUL) & (REN "%~1.NEW" "%~nx1") & (GOTO:EOF)
+
 goto main
