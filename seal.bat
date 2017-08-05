@@ -29,6 +29,7 @@ if %NumericalI%== news goto News
 if %NumericalI%== prg goto PRG
 if %NumericalI%== DevUni goto universalC
 if %NumericalI%== callp goto callp
+if %NumericalI%== UniDoc goto UniDoc
 cls
 set NumericalI=" "
 ::END OF COMMANDS
@@ -66,6 +67,20 @@ echo -SHW types Hello World
 echo -SYT types www.youtube.com
 echo -SFB types www.facebook.com
 echo -SGG types www.google.com
+echo.
+echo [7mFOR UNIDOC[0m
+echo Format Name is the name of the template that you can type in to make documenting faster.
+echo The first [7m4[0m values go in order at the beginning of the text file. Type 0 if you don't need that specific value.
+echo The final value goes at the end of the document. A good way to use this would be a character count.
+echo Below are a list of values you can use.
+echo.
+echo time          ~  Types Normal Batch Time (%time%)
+echo timeLarge     ~  Types current time (date-month-year hour.minute.second.mili)
+echo date          ~  Types Normal Batch Date (%date%)
+echo pcName        ~  Types computer name (%computername%)
+set txtmcount=0
+for %%x in (*.txt) do set /a txtmcount+=1
+echo ordernum      ~  Types number of text files in a directory (%txtmcount%)
 echo.
 pause
 ::END
@@ -444,11 +459,45 @@ set prgthing=" "
 set x=" "
 goto main
 :universalC
+cls
 ::write to specific line, writes on 5th
 ::for /F "skip=4 delims=" %i in (test.txt) do echo %i
 ::call :TEXTMAN RL 1 main.config 2
-::goto main
+goto main
+::
+:UniDoc
+set uname="None"
+set uconfirm=" "
+set u1="0"
+set u2="0"
+set u3="0"
+set u4="0"
+set u5="0"
+cls
+echo [94mUniversal Documenter[0m
+echo [97mAllows you to create a text file template with custom values.[0m
+echo.
+echo See [92m'Help'[0m to see the available commands.
+echo Type exit to go back to the main menu.
+echo You can have a possible [92m5[0m values to include in your document.
+set /p uname= [91mFormat Name[0m ~ 
+if %u1%==exit goto main
+set /p u1= [91m1st[0m Value ~ 
+set /p u2= [91m2nd[0m Value ~ 
+set /p u3= [91m3rd[0m Value ~ 
+set /p u4= [91m4th[0m Value ~ 
+set /p u5= [91m5th[0m Value ~ 
+cls
+::if block, don't know if this is the most efficient way of doing things, but I don't think an array would work here.
 
+::end if block
+echo Confirm that your document will be named "%uname%"
+echo The start of your document will begin with %inputsum%
+set /p uconfirm= y/n
+IF %uconfirm%== y goto uniCreate
+IF %uconfirm%== n goto UniDoc
+goto UniDoc
+:uniCreate
 
 :TEXTMAN
 :: by Elektro H@cker
@@ -507,3 +556,31 @@ REM ACTIONS:
 (REN "%~1" "%~nx1.BAK") & (MOVE /Y "%~1.BAK" "%TEMP%\" >NUL) & (REN "%~1.NEW" "%~nx1") & (GOTO:EOF)
 
 goto main
+
+
+:GetTime
+set Now=
+for /f "tokens=* skip=1" %%A in ('wmic os get LocalDateTime') do (
+  if not defined Now (
+    set Now=%%A
+  )
+)
+set yy=%Now:~2,2%
+set nn=%Now:~4,2%
+set dd=%Now:~6,2%
+set hh=%Now:~8,2%
+set mm=%Now:~10,2%
+set ss=%Now:~12,9%
+set /a n=1%nn%-100
+for /f "tokens=%n% delims=," %%a IN ("Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec") do set mmm=%%a
+set AmPm=AM
+set /a h=1%hh%-100
+if %h% GTR 12 (
+  set /a h=%h%-12
+  set AmPm=PM
+)
+set hh=0%h%
+set hh=%hh:~-2%
+set GetTime=%dd%-%mmm%-%yy% %hh%.%mm%.%ss% %AmPm%
+exit /b
+
