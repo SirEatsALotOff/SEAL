@@ -30,6 +30,7 @@ if %NumericalI%== prg goto PRG
 if %NumericalI%== DevUni goto universalC
 if %NumericalI%== callp goto callp
 if %NumericalI%== UniDoc goto UniDoc
+if %NumericalI%== UniCreate goto actualUniCreate
 cls
 set NumericalI=" "
 ::END OF COMMANDS
@@ -466,13 +467,13 @@ cls
 goto main
 ::
 :UniDoc
-set uname="None"
+set uname=None
 set uconfirm=" "
 set u1="0"
 set u2="0"
 set u3="0"
 set u4="0"
-set u5="0"
+set u5=""
 cls
 echo [94mUniversal Documenter[0m
 echo [97mAllows you to create a text file template with custom values.[0m
@@ -488,17 +489,96 @@ set /p u3= [91m3rd[0m Value ~
 set /p u4= [91m4th[0m Value ~ 
 set /p u5= [91m5th[0m Value ~ 
 cls
+goto ifblock
+:ifblock
 ::if block, don't know if this is the most efficient way of doing things, but I don't think an array would work here.
+if %u1%==time set u1t=%time%
+if %u2%==time set u2t=%time%
+if %u3%==time set u3t=%time%
+if %u4%==time set u4t=%time%
+if %u5%==time set u5t=%time%
+call :GetTime
+set timeLarge=%GetTime%
+if %u1%==timeLarge set u1t=%timeLarge%
+if %u2%==timeLarge set u2t=%timeLarge%
+if %u3%==timeLarge set u3t=%timeLarge%
+if %u4%==timeLarge set u4t=%timeLarge%
+if %u5%==timeLarge set u5t=%timeLarge%
 
+if %u1%==date set u1t=%date%
+if %u2%==date set u2t=%date%
+if %u3%==date set u3t=%date%
+if %u4%==date set u4t=%date%
+if %u5%==date set u5t=%date%
+set inputsum=%u1t%~%u2t%~%u3t%~%u4t%
+:endifblock
 ::end if block
-echo Confirm that your document will be named "%uname%"
-echo The start of your document will begin with %inputsum%
+echo Confirm that your template will be named "%uname%"
+echo Note: If your values are dynamic, the one displayed below may not match the document.
+echo The start of your documents will begin with %inputsum% and end with %u5t%
+set uconfirm="y"
 set /p uconfirm= y/n
 IF %uconfirm%== y goto uniCreate
 IF %uconfirm%== n goto UniDoc
 goto UniDoc
 :uniCreate
+cls
+if exist C:\SEAL\%uname%.UniTemp goto UniDoc
+if NOT exist  C:\SEAL\%uname%.UniTemp goto creationisgreat
+:creationisgreat
+@echo>C:\SEAL\%uname%.UniTemp
+::set Unitemplate=%u1%~%u2%~%u3%~%u4%~%u5%
+call :TEXTMAN I 1 %uname%.UniTemp brk
+call :TEXTMAN I 2 %uname%.UniTemp %u1%
 
+call :TEXTMAN I 3 %uname%.UniTemp %u2%
+
+call :TEXTMAN I 4 %uname%.UniTemp %u3%
+
+call :TEXTMAN I 5 %uname%.UniTemp %u4%
+
+call :TEXTMAN I 6 %uname%.UniTemp %u5%
+
+call :TEXTMAN E 7 %uname%.UniTemp
+goto main
+:actualUniCreate
+set uname=" "
+cls
+set /p uname= Name of template. 
+echo.
+set /p udname= Name of document. 
+echo.
+set /p UniText= Text for document. 
+::Uses UniDoc templates
+set confirm=0
+if exist C:\SEAL\%uname%.UniTemp set /a confirm=%confirm%+1
+if NOT exist C:\SEAL\%udname%.rtf set /a confirm=%confirm%+1
+if %confirm%== 2 goto actualnotlyingcreation
+goto actualUniCreate
+:actualnotlyingcreation
+set "xprvar="
+for /F "skip=1 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
+set u1=%xprvar%
+pause
+set "xprvar="
+for /F "skip=2 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
+set u2=%xprvar%
+set "xprvar="
+for /F "skip=3 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
+set u3=%xprvar%
+set "xprvar="
+for /F "skip=4 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
+set u4=%xprvar%
+set "xprvar="
+for /F "skip=5 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
+set u5=%xprvar%
+pause
+call :ifblock
+
+set "UniText= %u1t% ~ %u2t% ~ %u3t% ~ %u4t%. %UniText% %u5t%"
+
+@echo %UniText%> %udname%.rtf
+goto main
 :TEXTMAN
 :: by Elektro H@cker
 REM SYNTAX:
