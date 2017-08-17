@@ -34,6 +34,6 @@ exit
 :prgMacro
 ::now THIS is going to be a huge pain on seal.bat code. This part is easy.
 set /p pgrmcro=<C:\SEAL\%macroID%.smcr
-Start ""  "%macroID%"
+Start ""  "%pgrmcro%"
 cls
 exit

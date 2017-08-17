@@ -1,5 +1,6 @@
 @echo off
 call exithandl.bat
+start /min starting.bat
 :main
 set /p title=<C:\SEAL\title.title
 rem type C:\SEAL\title.title
@@ -559,7 +560,6 @@ goto actualUniCreate
 set "xprvar="
 for /F "skip=1 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
 set u1=%xprvar%
-pause
 set "xprvar="
 for /F "skip=2 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
 set u2=%xprvar%
@@ -572,7 +572,6 @@ set u4=%xprvar%
 set "xprvar="
 for /F "skip=5 delims=" %%i in (C:\SEAL\%uname%.UniTemp) do if not defined xprvar set "xprvar=%%i"
 set u5=%xprvar%
-pause
 call :ifblock
 
 set "UniText= %u1t% ~ %u2t% ~ %u3t% ~ %u4t%. %UniText% %u5t%"
